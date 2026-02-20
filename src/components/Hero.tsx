@@ -81,8 +81,8 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Image — CSS animation only, no JS blocking LCP */}
-        <div className="relative order-2 aspect-[4/5] w-full overflow-hidden rounded-3xl lg:aspect-auto animate-hero-image">
+        {/* Image — no opacity animation to avoid blocking LCP */}
+        <div className="relative order-2 aspect-[4/5] w-full overflow-hidden rounded-3xl lg:aspect-auto">
           <Image
             src="/images/hero/hero-home.webp"
             alt="Aménagement extérieur haut de gamme par Max Aménagement dans les Monts du Lyonnais"
