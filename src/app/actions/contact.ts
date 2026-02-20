@@ -210,7 +210,7 @@ export async function submitContactForm(data: ContactFormData) {
       // Email pour Max
       resend.emails.send({
         from: "Max Aménagement <onboarding@resend.dev>",
-        to: "amenagement.max@gmail.com",
+        to: process.env.CONTACT_EMAIL!,
         subject: `Nouveau projet : ${data.name}`,
         replyTo: data.email,
         html: emailForMax(data),
