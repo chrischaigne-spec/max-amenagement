@@ -25,23 +25,6 @@ const childVariants = {
   },
 };
 
-const badgeVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: easing },
-  },
-};
-
-const imageVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 1, ease: easing, delay: 0.3 },
-  },
-};
 
 const titleWords =
   "L'art d'aménager votre habitat, de l'intérieur à vos espaces extérieurs.".split(" ");
@@ -98,13 +81,8 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Image — top-aligned with the badge via lg:items-start + shared pt */}
-        <motion.div
-          variants={imageVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative order-2 aspect-[4/5] w-full overflow-hidden rounded-3xl lg:aspect-auto"
-        >
+        {/* Image — CSS animation only, no JS blocking LCP */}
+        <div className="relative order-2 aspect-[4/5] w-full overflow-hidden rounded-3xl lg:aspect-auto animate-hero-image">
           <Image
             src="/images/hero/hero-home.webp"
             alt="Aménagement extérieur haut de gamme par Max Aménagement dans les Monts du Lyonnais"
@@ -113,7 +91,7 @@ export default function Hero() {
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );
