@@ -3,7 +3,7 @@ import { Manrope } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import BottomBlur from "@/components/BottomBlur";
+
 import "./globals.css";
 
 const manrope = Manrope({
@@ -31,7 +31,6 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <BottomBlur />
       </body>
     </html>
   );

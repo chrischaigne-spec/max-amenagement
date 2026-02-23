@@ -144,12 +144,26 @@ export default function Footer() {
                 <p className="text-xs text-zinc-500">
                   &copy; 2026 Max Aménagement. Tous droits réservés.
                 </p>
-                <Link
-                  href="/mentions-legales"
-                  className="text-xs text-zinc-500 transition-colors hover:text-white"
-                >
-                  Mentions légales
-                </Link>
+                <div className="flex items-center gap-3 text-xs text-zinc-500">
+                  <Link
+                    href="/mentions-legales"
+                    className="transition-colors hover:text-white"
+                  >
+                    Mentions légales
+                  </Link>
+                  <span className="text-zinc-700">|</span>
+                  <span>
+                    Créé par{" "}
+                    <a
+                      href="https://esprit-digital.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-white"
+                    >
+                      esprit-digital
+                    </a>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
