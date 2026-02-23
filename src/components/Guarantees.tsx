@@ -47,14 +47,17 @@ const bannerVariants = {
 
 export default function Guarantees() {
   return (
-    <section className="scroll-mt-[100px] bg-zinc-50 py-24 font-manrope lg:py-32">
+    <section className="scroll-mt-[100px] bg-zinc-50 pt-12 pb-24 font-manrope lg:pt-16 lg:pb-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
-            Nos Garanties
+          <span className="inline-block rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium tracking-wide text-white">
+            Garanties
+          </span>
+          <h2 className="mt-6 text-3xl font-light tracking-[-0.04em] text-black sm:text-4xl lg:text-5xl">
+            Nos engagements pour votre sérénité
           </h2>
-          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-zinc-500">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-[1.7] text-zinc-500">
             Des engagements concrets pour chaque projet que nous réalisons.
           </p>
         </div>
@@ -96,31 +99,32 @@ export default function Guarantees() {
           })}
         </motion.div>
 
-        {/* Banner */}
+        {/* Banner — pill badge */}
         <motion.div
           variants={bannerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: easing, delay: 0.45 }}
-          className="mt-16 text-center"
+          className="mt-14 flex justify-center"
         >
-          <div className="mx-auto mb-6 max-w-md border-t border-zinc-200" />
-          <p className="text-sm text-zinc-400">
-            D&apos;office dans votre devis :{" "}
-            <span className="font-semibold text-zinc-600">
-              Conseils &amp; plans 3D
-            </span>
-            ,{" "}
-            <span className="font-semibold text-zinc-600">
-              suivi de chantier en temps réel
-            </span>{" "}
-            et{" "}
-            <span className="font-semibold text-zinc-600">
-              évacuation complète des gravats
-            </span>
-            .
-          </p>
+          <div className="rounded-full border border-[#C9A96E]/40 bg-zinc-50 px-8 py-4 text-center shadow-sm">
+            <p className="text-sm text-zinc-500">
+              D&apos;office dans votre devis :{" "}
+              <span className="font-bold text-zinc-900">
+                Conseils &amp; plans 3D
+              </span>
+              ,{" "}
+              <span className="font-bold text-zinc-900">
+                suivi de chantier
+              </span>{" "}
+              et{" "}
+              <span className="font-bold text-zinc-900">
+                évacuation des gravats
+              </span>
+              .
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
