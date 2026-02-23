@@ -100,7 +100,7 @@ export default function AmenagementExterieur() {
       {/* Hero */}
       <section className="relative flex min-h-[50vh] items-center justify-center bg-black pt-40 pb-16 lg:min-h-[60vh] lg:pt-48 lg:pb-20">
         <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
-          <span className="inline-block rounded-full bg-[#27272A] px-4 py-1.5 text-xs font-medium tracking-wide text-white">
+          <span className="inline-block rounded-full bg-[#27272A] px-5 py-2 text-sm font-semibold tracking-wide text-white">
             Nos Expertises
           </span>
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">

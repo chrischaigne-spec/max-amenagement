@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedButton from "@/components/AnimatedButton";
 
@@ -18,8 +19,16 @@ const navLinks = [
 const easing = [0.22, 1, 0.36, 1] as const;
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleHomeClick = useCallback((e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -53,7 +62,7 @@ export default function Header() {
           <Link
             href="/"
             className="relative flex shrink-0 items-center"
-            onClick={closeMenu}
+            onClick={(e) => { closeMenu(); handleHomeClick(e); }}
           >
             <Image
               src="/branding/logo-max-amenagement.png"
@@ -73,6 +82,7 @@ export default function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  onClick={link.href === "/" ? handleHomeClick : undefined}
                   className="text-sm font-medium text-white/70 transition-colors duration-300 hover:text-white"
                 >
                   {link.label}
@@ -155,7 +165,7 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    onClick={closeMenu}
+                    onClick={(e) => { closeMenu(); if (link.href === "/") handleHomeClick(e); }}
                     className="block min-h-[44px] text-2xl font-semibold text-white transition-colors duration-300 hover:text-white/70"
                   >
                     {link.label}
