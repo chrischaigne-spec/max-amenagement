@@ -47,7 +47,7 @@ export default function Contact() {
             {/* ─── Left: Info ─── */}
             <div className="flex flex-col">
               {/* Badge */}
-              <span className="inline-block w-fit rounded-full bg-[#27272A] px-4 py-1.5 text-xs font-medium tracking-wide text-white">
+              <span className="inline-block w-fit rounded-full bg-[#27272A] px-5 py-2 text-sm font-semibold tracking-wide text-white">
                 Contact
               </span>
 

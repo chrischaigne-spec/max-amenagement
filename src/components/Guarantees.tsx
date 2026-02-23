@@ -40,19 +40,14 @@ const containerVariants = {
   },
 };
 
-const bannerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
-
 export default function Guarantees() {
   return (
-    <section className="scroll-mt-[100px] bg-zinc-50 pt-12 pb-24 font-manrope lg:pt-16 lg:pb-32">
+    <section className="scroll-mt-[100px] bg-zinc-50 pt-8 pb-16 font-manrope lg:pt-12 lg:pb-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center">
-          <span className="inline-block rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium tracking-wide text-white">
-            Garanties
+          <span className="inline-block rounded-full bg-zinc-900 px-5 py-2 text-sm font-semibold tracking-wide text-white">
+            Nos Garanties
           </span>
           <h2 className="mt-6 text-3xl font-light tracking-[-0.04em] text-black sm:text-4xl lg:text-5xl">
             Nos engagements pour votre sérénité
@@ -99,33 +94,6 @@ export default function Guarantees() {
           })}
         </motion.div>
 
-        {/* Banner — pill badge */}
-        <motion.div
-          variants={bannerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: easing, delay: 0.45 }}
-          className="mt-14 flex justify-center"
-        >
-          <div className="rounded-full border border-[#C9A96E]/40 bg-zinc-50 px-8 py-4 text-center shadow-sm">
-            <p className="text-sm text-zinc-500">
-              D&apos;office dans votre devis :{" "}
-              <span className="font-bold text-zinc-900">
-                Conseils &amp; plans 3D
-              </span>
-              ,{" "}
-              <span className="font-bold text-zinc-900">
-                suivi de chantier
-              </span>{" "}
-              et{" "}
-              <span className="font-bold text-zinc-900">
-                évacuation des gravats
-              </span>
-              .
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

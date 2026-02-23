@@ -236,8 +236,8 @@ export default function Testimonials() {
   return (
     <section id="temoignages" className="scroll-mt-[100px] bg-white py-12 font-manrope lg:py-24">
       <div className="mx-auto mb-12 max-w-7xl px-6 text-center lg:mb-16 lg:px-8">
-        <span className="inline-block rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium tracking-wide text-white">
-          Témoignages
+        <span className="inline-block rounded-full bg-zinc-900 px-5 py-2 text-sm font-semibold tracking-wide text-white">
+          Nos Témoignages
         </span>
         <h2 className="mt-6 text-3xl font-light tracking-[-0.04em] text-black sm:text-4xl lg:text-5xl">
           Nos clients témoignent

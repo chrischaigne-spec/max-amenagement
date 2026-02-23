@@ -28,7 +28,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: easing }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium tracking-wide text-muted">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-semibold tracking-wide text-muted">
               <ShieldCheck size={14} strokeWidth={1.5} />
               Votre artisan de confiance dans les Monts du Lyonnais
             </span>

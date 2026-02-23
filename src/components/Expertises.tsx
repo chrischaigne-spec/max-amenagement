@@ -252,8 +252,8 @@ export default function Expertises() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16 text-center">
-          <span className="inline-block rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium tracking-wide text-white">
-            Nos expertises
+          <span className="inline-block rounded-full bg-zinc-900 px-5 py-2 text-sm font-semibold tracking-wide text-white">
+            Nos Expertises
           </span>
           <h2 className="mt-6 text-3xl font-light tracking-[-0.04em] text-black sm:text-4xl lg:text-5xl">
             L&apos;Étendue de Notre Savoir-Faire
