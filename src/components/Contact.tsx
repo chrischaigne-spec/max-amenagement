@@ -231,15 +231,16 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-900 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-700 disabled:opacity-70"
+                  className="group relative mt-2 flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-zinc-900 px-6 py-3.5 text-sm font-semibold text-white transition-colors disabled:opacity-70"
                 >
+                  <span className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-[#8B6542] via-[#C9956A] to-[#8B6542] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   {status === "loading" ? (
-                    <>
+                    <span className="relative z-10 flex items-center gap-2">
                       <Loader2 size={18} className="animate-spin" />
                       Envoi en cours…
-                    </>
+                    </span>
                   ) : (
-                    "Envoyer"
+                    <span className="relative z-10">Envoyer</span>
                   )}
                 </button>
 

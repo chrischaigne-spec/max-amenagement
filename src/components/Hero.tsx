@@ -67,7 +67,7 @@ export default function Hero() {
         {/* Image — no opacity animation to avoid blocking LCP */}
         <div className="relative order-2 aspect-[4/5] w-full overflow-hidden rounded-3xl lg:aspect-auto">
           <Image
-            src="/images/hero/hero-home.webp"
+            src="/images/hero/hero-max-amenagement.webp"
             alt="Aménagement extérieur haut de gamme par Max Aménagement dans les Monts du Lyonnais"
             fill
             priority

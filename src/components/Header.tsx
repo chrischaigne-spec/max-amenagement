@@ -9,8 +9,8 @@ import AnimatedButton from "@/components/AnimatedButton";
 
 const navLinks = [
   { href: "/", label: "Accueil" },
-  { href: "/amenagement-interieur", label: "Intérieur" },
   { href: "/amenagement-exterieur", label: "Extérieur" },
+  { href: "/amenagement-interieur", label: "Intérieur" },
   { href: "/#realisations", label: "Réalisations" },
   { href: "/#a-propos", label: "À propos" },
   { href: "/#temoignages", label: "Avis" },
@@ -61,19 +61,22 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="relative flex shrink-0 items-center"
+            className="relative flex shrink-0 items-center gap-2.5"
             onClick={(e) => { closeMenu(); handleHomeClick(e); }}
           >
             <Image
               src="/branding/logo-max-amenagement.png"
               alt="Max Aménagement - Artisan aménagement Monts du Lyonnais"
-              width={120}
-              height={36}
+              width={80}
+              height={24}
               priority
-              className={`max-w-[100px] h-auto sm:max-w-[120px] transition-all duration-300 ${
+              className={`max-w-[44px] h-auto sm:max-w-[52px] transition-all duration-300 ${
                 scrolled ? "brightness-110 contrast-110 drop-shadow-[0_0_6px_rgba(0,0,0,0.4)]" : ""
               }`}
             />
+            <span className="text-base font-semibold tracking-wide text-white sm:text-lg">
+              Max Aménagement
+            </span>
           </Link>
 
           {/* Desktop Nav — hidden below lg */}
@@ -83,7 +86,7 @@ export default function Header() {
                 <Link
                   href={link.href}
                   onClick={link.href === "/" ? handleHomeClick : undefined}
-                  className="text-sm font-medium text-white/70 transition-colors duration-300 hover:text-white"
+                  className="text-sm font-medium text-[#C9956A] transition-colors duration-300 hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -166,7 +169,7 @@ export default function Header() {
                   <Link
                     href={link.href}
                     onClick={(e) => { closeMenu(); if (link.href === "/") handleHomeClick(e); }}
-                    className="block min-h-[44px] text-2xl font-semibold text-white transition-colors duration-300 hover:text-white/70"
+                    className="block min-h-[44px] text-2xl font-semibold text-[#C9956A] transition-colors duration-300 hover:text-white"
                   >
                     {link.label}
                   </Link>

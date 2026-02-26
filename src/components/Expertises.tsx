@@ -28,28 +28,12 @@ interface Expertise {
 
 const expertises: Expertise[] = [
   {
-    title: "Cuisines Sur-Mesure",
+    title: "Maçonnerie & Structure",
     description:
-      "L'alliance parfaite entre ergonomie et esthétique haut de gamme.",
-    image: "/images/services/cuisine.webp",
-    icon: LayoutPanelLeft,
-    href: "/amenagement-interieur#cuisines",
-  },
-  {
-    title: "Rénovation d'intérieurs",
-    description:
-      "Transformation complète de vos espaces de vie, du sol au plafond.",
-    image: "/images/services/renovation.webp",
-    icon: Paintbrush,
-    href: "/amenagement-interieur#renovation",
-  },
-  {
-    title: "Salles de Bains & Bien-être",
-    description:
-      "Créez votre havre de paix avec des matériaux nobles et durables.",
-    image: "/images/services/salle-de-bain.webp",
-    icon: Bath,
-    href: "/amenagement-interieur#salles-de-bains",
+      "Travaux de gros œuvre, murs de soutènement et assainissement.",
+    image: "/images/services/maconnerie.webp",
+    icon: Landmark,
+    href: "/amenagement-exterieur#maconnerie",
   },
   {
     title: "Terrasses & Dallages Extérieurs",
@@ -68,12 +52,28 @@ const expertises: Expertise[] = [
     href: "/amenagement-exterieur#jardins",
   },
   {
-    title: "Maçonnerie & Structure",
+    title: "Rénovation d'intérieurs",
     description:
-      "Travaux de gros œuvre, murs de soutènement et assainissement.",
-    image: "/images/services/maconnerie.webp",
-    icon: Landmark,
-    href: "/amenagement-exterieur#maconnerie",
+      "Transformation complète de vos espaces de vie, du sol au plafond.",
+    image: "/images/services/renovation.webp",
+    icon: Paintbrush,
+    href: "/amenagement-interieur#renovation",
+  },
+  {
+    title: "Cuisines Sur-Mesure",
+    description:
+      "L'alliance parfaite entre ergonomie et esthétique haut de gamme.",
+    image: "/images/services/cuisine.webp",
+    icon: LayoutPanelLeft,
+    href: "/amenagement-interieur#cuisines",
+  },
+  {
+    title: "Salles de Bains & Bien-être",
+    description:
+      "Créez votre havre de paix avec des matériaux nobles et durables.",
+    image: "/images/services/salle-de-bain.webp",
+    icon: Bath,
+    href: "/amenagement-interieur#salles-de-bains",
   },
 ];
 
@@ -177,13 +177,14 @@ function DesktopExpertises() {
                       </p>
                       <Link
                         href={e.href}
-                        className="group mt-4 inline-flex items-center gap-2 rounded-full bg-zinc-900 px-5 py-2.5 text-xs font-semibold tracking-wide text-white transition-all duration-300 hover:bg-black hover:scale-105"
+                        className="group relative mt-4 inline-flex items-center gap-2 overflow-hidden rounded-full bg-zinc-900 px-5 py-2.5 text-xs font-semibold tracking-wide text-white transition-all duration-300 hover:scale-105"
                       >
-                        Découvrir l&apos;expertise
+                        <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-[#8B6542] via-[#C9956A] to-[#8B6542] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <span className="relative z-10">Découvrir l&apos;expertise</span>
                         <ArrowRight
                           size={14}
                           strokeWidth={1.5}
-                          className="transition-transform duration-300 group-hover:translate-x-0.5"
+                          className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5"
                         />
                       </Link>
                     </div>

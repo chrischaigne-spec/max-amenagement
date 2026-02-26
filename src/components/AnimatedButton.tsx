@@ -27,8 +27,8 @@ export default function AnimatedButton({
         ${compact ? "px-6 py-2.5" : "px-7 py-3.5"}`}
       style={{ WebkitTapHighlightColor: "transparent" }}
     >
-      {/* Sliding dark overlay — inset -1px to cover any sub-pixel gap */}
-      <span className="pointer-events-none absolute -inset-px rounded-full bg-zinc-900 origin-right scale-x-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:origin-left group-hover:scale-x-100" />
+      {/* Sliding gold gradient overlay — inset -1px to cover any sub-pixel gap */}
+      <span className="pointer-events-none absolute -inset-px rounded-full bg-gradient-to-r from-[#8B6542] via-[#C9956A] to-[#8B6542] origin-right scale-x-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:origin-left group-hover:scale-x-100" />
 
       {/* Text */}
       <span className="relative z-10 transition-colors duration-300 group-hover:text-white">

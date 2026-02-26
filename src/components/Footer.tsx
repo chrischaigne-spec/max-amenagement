@@ -4,20 +4,20 @@ import AnimatedButton from "@/components/AnimatedButton";
 
 const services = [
   [
-    { label: "Cuisines Sur-Mesure", href: "/amenagement-interieur#cuisines" },
-    { label: "Rénovation d'intérieurs", href: "/amenagement-interieur#renovation" },
-    { label: "Salles de Bains & Bien-être", href: "/amenagement-interieur#salles-de-bains" },
-  ],
-  [
+    { label: "Maçonnerie & Structure", href: "/amenagement-exterieur#maconnerie" },
     { label: "Terrasses & Dallages Extérieurs", href: "/amenagement-exterieur#terrasses" },
     { label: "Jardins & Paysages", href: "/amenagement-exterieur#jardins" },
-    { label: "Maçonnerie & Structure", href: "/amenagement-exterieur#maconnerie" },
+  ],
+  [
+    { label: "Rénovation d'intérieurs", href: "/amenagement-interieur#renovation" },
+    { label: "Cuisines Sur-Mesure", href: "/amenagement-interieur#cuisines" },
+    { label: "Salles de Bains & Bien-être", href: "/amenagement-interieur#salles-de-bains" },
   ],
 ];
 
 const siteLinks = [
-  { href: "/amenagement-interieur", label: "Intérieur" },
   { href: "/amenagement-exterieur", label: "Extérieur" },
+  { href: "/amenagement-interieur", label: "Intérieur" },
   { href: "/#a-propos", label: "À Propos" },
   { href: "/#realisations", label: "Réalisations" },
   { href: "/#temoignages", label: "Avis" },
