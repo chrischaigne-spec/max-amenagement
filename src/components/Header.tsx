@@ -52,8 +52,8 @@ export default function Header() {
         className={`
           mx-auto mt-4 transition-all duration-300 ease-in-out
           ${scrolled
-            ? "max-w-[1200px] rounded-2xl border border-white/20 bg-[#0F0F0F]/90 shadow-xl backdrop-blur-lg py-2 mx-4 lg:mx-auto"
-            : "max-w-[1200px] rounded-2xl border border-transparent bg-transparent py-5 mx-4 lg:mx-auto"
+            ? "max-w-[1200px] rounded-2xl border border-white/20 bg-[#0F0F0F]/90 shadow-xl backdrop-blur-lg py-2 mx-6 sm:mx-8 lg:mx-auto"
+            : "max-w-[1200px] rounded-2xl border border-transparent bg-transparent py-5 mx-6 sm:mx-8 lg:mx-auto"
           }
         `}
       >
