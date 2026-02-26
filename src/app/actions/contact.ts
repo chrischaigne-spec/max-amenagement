@@ -209,7 +209,7 @@ export async function submitContactForm(data: ContactFormData) {
     await Promise.all([
       // Email pour Max
       resend.emails.send({
-        from: "Max Aménagement <onboarding@resend.dev>",
+        from: "Max Aménagement <contact@max-amenagement.fr>",
         to: process.env.CONTACT_EMAIL!,
         subject: `Nouveau projet : ${data.name}`,
         replyTo: data.email,
@@ -217,7 +217,7 @@ export async function submitContactForm(data: ContactFormData) {
       }),
       // Email de confirmation pour le client
       resend.emails.send({
-        from: "Max Aménagement <onboarding@resend.dev>",
+        from: "Max Aménagement <contact@max-amenagement.fr>",
         to: data.email,
         subject: `Max-Aménagement - Message bien reçu Mme/Mr ${data.name}`,
         html: emailForClient(data),
