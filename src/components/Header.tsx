@@ -57,7 +57,7 @@ export default function Header() {
           }
         `}
       >
-        <nav className="flex items-center justify-between px-4 lg:px-8">
+        <nav className="flex items-center justify-between pl-0 pr-2 lg:pl-0 lg:pr-4">
           {/* Logo */}
           <Link
             href="/"
@@ -67,15 +67,15 @@ export default function Header() {
             <Image
               src="/branding/logo-max-amenagement.png"
               alt="Max Aménagement - Artisan aménagement Monts du Lyonnais"
-              width={80}
-              height={24}
+              width={120}
+              height={36}
               priority
-              className={`max-w-[44px] h-auto sm:max-w-[52px] transition-all duration-300 ${
+              className={`max-w-[70px] h-auto sm:max-w-[80px] transition-all duration-300 ${
                 scrolled ? "brightness-110 contrast-110 drop-shadow-[0_0_6px_rgba(0,0,0,0.4)]" : ""
               }`}
             />
-            <span className="text-base font-semibold tracking-wide text-white sm:text-lg">
-              Max Aménagement
+            <span className="text-base font-light tracking-[0.15em] text-white sm:text-lg">
+              MAX <span className="text-white/70">AMÉNAGEMENT</span>
             </span>
           </Link>
 
