@@ -9,8 +9,8 @@
 
   --font-manrope: "Manrope", sans-serif;
 
-  --animate-marquee-left: marquee-left 15s linear infinite;
-  --animate-marquee-right: marquee-right 15s linear infinite;
+  --animate-marquee-left: marquee-left 10s linear infinite;
+  --animate-marquee-right: marquee-right 10s linear infinite;
 }
 
 body {
