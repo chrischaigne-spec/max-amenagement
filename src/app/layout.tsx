@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -26,6 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={manrope.variable}>
+      <head>
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="4f8f7a85-5779-4ba5-8dbe-98cb1746d257"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className="antialiased">
         <SmoothScroll />
         <Header />
