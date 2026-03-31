@@ -8,6 +8,25 @@ export const metadata: Metadata = {
   title: "Aménagement Extérieur | Terrasses, Enrochement & Maçonnerie — Max Aménagement",
   description:
     "Expert en aménagement extérieur dans l'Ouest Lyonnais et les Monts du Lyonnais : terrasses bois et dallage, enrochement de soutènement, maçonnerie de structure, microstations d'épuration et aménagement paysager. Intervention de Craponne à la Plaine du Forez.",
+  openGraph: {
+    title: "Aménagement Extérieur | Terrasses, Enrochement & Maçonnerie — Max Aménagement",
+    description:
+      "Terrasses, enrochement, maçonnerie et aménagement paysager dans l'Ouest Lyonnais et les Monts du Lyonnais.",
+    url: "https://max-amenagement.fr/amenagement-exterieur",
+    images: [
+      {
+        url: "/images/services/terrasse.webp",
+        alt: "Aménagement extérieur — Max Aménagement",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aménagement Extérieur | Terrasses, Enrochement & Maçonnerie — Max Aménagement",
+    description:
+      "Terrasses, enrochement, maçonnerie et aménagement paysager dans l'Ouest Lyonnais et les Monts du Lyonnais.",
+    images: ["/images/services/terrasse.webp"],
+  },
 };
 
 interface Service {

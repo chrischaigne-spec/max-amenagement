@@ -8,6 +8,25 @@ export const metadata: Metadata = {
   title: "Aménagement Intérieur | Cuisine, Rénovation & Salle de Bain — Max Aménagement",
   description:
     "Spécialiste de l'aménagement intérieur dans l'Ouest Lyonnais et les Monts du Lyonnais : cuisines sur-mesure, rénovation complète, salles de bains, cloisonnement, mezzanines et maîtrise d'œuvre. Intervention de Craponne à la Plaine du Forez.",
+  openGraph: {
+    title: "Aménagement Intérieur | Cuisine, Rénovation & Salle de Bain — Max Aménagement",
+    description:
+      "Cuisines sur-mesure, rénovation complète, salles de bains et maîtrise d'œuvre dans l'Ouest Lyonnais et les Monts du Lyonnais.",
+    url: "https://max-amenagement.fr/amenagement-interieur",
+    images: [
+      {
+        url: "/images/services/cuisine.webp",
+        alt: "Aménagement intérieur — Max Aménagement",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aménagement Intérieur | Cuisine, Rénovation & Salle de Bain — Max Aménagement",
+    description:
+      "Cuisines sur-mesure, rénovation complète, salles de bains et maîtrise d'œuvre dans l'Ouest Lyonnais et les Monts du Lyonnais.",
+    images: ["/images/services/cuisine.webp"],
+  },
 };
 
 interface Service {

@@ -15,9 +15,32 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://max-amenagement.fr"),
   title: "Max Aménagement | Rénovation, Terrasses & Aménagement — Ouest Lyonnais",
   description:
     "Max Aménagement, artisan spécialiste de la rénovation intérieure, terrasses, aménagement extérieur et maçonnerie dans les Monts du Lyonnais, l'Ouest Lyonnais et la Loire. Devis gratuit à Aveize (69).",
+  openGraph: {
+    title: "Max Aménagement | Rénovation, Terrasses & Aménagement — Ouest Lyonnais",
+    description:
+      "Artisan spécialiste de la rénovation intérieure, terrasses, aménagement extérieur et maçonnerie dans les Monts du Lyonnais, l'Ouest Lyonnais et la Loire.",
+    url: "https://max-amenagement.fr",
+    siteName: "Max Aménagement",
+    locale: "fr_FR",
+    type: "website",
+    images: [
+      {
+        url: "/images/logo.webp",
+        alt: "Max Aménagement — Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Max Aménagement | Rénovation, Terrasses & Aménagement — Ouest Lyonnais",
+    description:
+      "Artisan spécialiste de la rénovation intérieure, terrasses, aménagement extérieur et maçonnerie dans les Monts du Lyonnais, l'Ouest Lyonnais et la Loire.",
+    images: ["/images/logo.webp"],
+  },
 };
 
 export default function RootLayout({
