@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Script from "next/script";
 import { MapPin, Mail, Phone, Instagram, Loader2 } from "lucide-react";
 import { submitContactForm } from "@/app/actions/contact";
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAAC9kqyAtQKV3bt4R";
 
 interface FormData {
   name: string;
@@ -17,6 +20,9 @@ export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [loadedAt] = useState(() => Date.now());
+  const turnstileToken = useRef<string>("");
+  const turnstileWidgetId = useRef<string>("");
+  const turnstileContainer = useRef<HTMLDivElement>(null);
 
   const {
     register,
@@ -25,11 +31,35 @@ export default function Contact() {
     formState: { errors },
   } = useForm<FormData>();
 
+  const renderTurnstile = useCallback(() => {
+    if (!turnstileContainer.current || !window.turnstile) return;
+    if (turnstileWidgetId.current) {
+      window.turnstile.reset(turnstileWidgetId.current);
+      return;
+    }
+    turnstileWidgetId.current = window.turnstile.render(turnstileContainer.current, {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: (token: string) => { turnstileToken.current = token; },
+      theme: "light",
+      size: "flexible",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (window.turnstile) renderTurnstile();
+  }, [renderTurnstile]);
+
   const onSubmit = async (data: FormData) => {
+    if (!turnstileToken.current) {
+      setStatus("error");
+      setErrorMsg("Veuillez patienter pendant la vérification de sécurité.");
+      return;
+    }
+
     setStatus("loading");
     setErrorMsg("");
 
-    const result = await submitContactForm({ ...data, _t: loadedAt });
+    const result = await submitContactForm({ ...data, _t: loadedAt, turnstileToken: turnstileToken.current });
 
     if (result.success) {
       setStatus("success");
@@ -37,6 +67,12 @@ export default function Contact() {
     } else {
       setStatus("error");
       setErrorMsg(result.error || "Il y a une erreur");
+    }
+
+    // Reset Turnstile for next submission
+    turnstileToken.current = "";
+    if (window.turnstile && turnstileWidgetId.current) {
+      window.turnstile.reset(turnstileWidgetId.current);
     }
   };
 
@@ -241,6 +277,9 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Turnstile — invisible bot verification */}
+                <div ref={turnstileContainer} className="flex justify-center" />
+
                 {/* Submit */}
                 <button
                   type="submit"
@@ -275,6 +314,11 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad"
+        strategy="lazyOnload"
+        onReady={renderTurnstile}
+      />
     </section>
   );
 }

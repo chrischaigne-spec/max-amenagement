@@ -11,6 +11,7 @@ interface ContactFormData {
   message: string;
   website?: string; // honeypot field — bots fill this, humans don't see it
   _t?: number; // timestamp — to detect instant submissions
+  turnstileToken?: string; // Cloudflare Turnstile verification token
 }
 
 const baseStyle = `
@@ -242,6 +243,24 @@ function isDisposableEmail(email: string): boolean {
 export async function submitContactForm(data: ContactFormData) {
   try {
     // ── Anti-spam checks (all return silent success to not alert bots) ──
+
+    // 0. Cloudflare Turnstile — verify the visitor is human
+    if (data.turnstileToken) {
+      const turnstileRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: process.env.TURNSTILE_SECRET_KEY!,
+          response: data.turnstileToken,
+        }),
+      });
+      const turnstileData = await turnstileRes.json();
+      if (!turnstileData.success) {
+        return { success: true }; // silent reject
+      }
+    } else {
+      return { success: true }; // no token = no Turnstile widget loaded = bot
+    }
 
     // 1. Honeypot — hidden field, only bots fill it
     if (data.website) {
