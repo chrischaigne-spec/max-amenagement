@@ -197,6 +197,8 @@ function emailForClient(data: ContactFormData) {
 </html>`;
 }
 
+// ── Anti-spam helpers ──────────────────────────────────────────────
+
 // Detect random gibberish strings (e.g. "GTeVqVzZZfnCwbDOBbzDbP")
 function looksLikeGibberish(text: string): boolean {
   const cleaned = text.replace(/\s+/g, "");
@@ -211,21 +213,68 @@ function looksLikeGibberish(text: string): boolean {
   return false;
 }
 
+// Detect URLs/links — spam always includes promotional links
+function containsLinks(text: string): boolean {
+  return /https?:\/\/|www\.|\.com\b|\.net\b|\.org\b|\.ru\b|\.cn\b|\.info\b|\.biz\b|\[url/i.test(text);
+}
+
+// Detect non-Latin characters (Chinese, Cyrillic, Arabic, Korean, etc.)
+// Allows Latin + extended Latin (accents), digits, punctuation, common symbols
+function containsNonLatinChars(text: string): boolean {
+  return /[^\u0000-\u024F\u1E00-\u1EFF\d\s.,;:!?'"()\-@/&+€$£%#\n\r°²³àâäéèêëïîôùûüÿçœæ]/i.test(text);
+}
+
+// Disposable/temporary email domains
+const disposableDomains = new Set([
+  "tempmail.com", "throwaway.email", "guerrillamail.com", "mailinator.com",
+  "yopmail.com", "tempail.com", "fakeinbox.com", "sharklasers.com",
+  "guerrillamailblock.com", "grr.la", "dispostable.com", "trashmail.com",
+  "10minutemail.com", "temp-mail.org", "emailondeck.com", "maildrop.cc",
+  "mohmal.com", "tempinbox.com", "burnermail.io", "guerrillamail.info",
+  "getnada.com", "tmail.com", "tmpmail.net", "tmpmail.org",
+]);
+
+function isDisposableEmail(email: string): boolean {
+  const domain = email.split("@")[1]?.toLowerCase();
+  return disposableDomains.has(domain);
+}
+
 export async function submitContactForm(data: ContactFormData) {
   try {
-    // Anti-spam: honeypot — if filled, it's a bot (silently succeed)
+    // ── Anti-spam checks (all return silent success to not alert bots) ──
+
+    // 1. Honeypot — hidden field, only bots fill it
     if (data.website) {
       return { success: true };
     }
 
-    // Anti-spam: time check — reject if submitted in under 3 seconds
+    // 2. Time check — reject if submitted in under 3 seconds
     if (data._t && Date.now() - data._t < 3000) {
-      return { success: true }; // silent success to not alert bots
+      return { success: true };
     }
 
-    // Anti-spam: content validation — reject gibberish
+    // 3. Gibberish detection — random strings in name, message, or email local part
     if (looksLikeGibberish(data.name) || looksLikeGibberish(data.message)) {
-      return { success: true }; // silent success
+      return { success: true };
+    }
+    const emailLocal = data.email?.split("@")[0] || "";
+    if (looksLikeGibberish(emailLocal)) {
+      return { success: true };
+    }
+
+    // 4. Link detection — real clients describe their project, they don't paste URLs
+    if (containsLinks(data.name) || containsLinks(data.message)) {
+      return { success: true };
+    }
+
+    // 5. Non-Latin characters — site is French, no reason for Chinese/Cyrillic/Arabic
+    if (containsNonLatinChars(data.name) || containsNonLatinChars(data.message)) {
+      return { success: true };
+    }
+
+    // 6. Disposable email — temporary mailboxes used by spammers
+    if (isDisposableEmail(data.email)) {
+      return { success: true };
     }
 
     if (!data.name || !data.email || !data.message) {
