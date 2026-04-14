@@ -11,8 +11,8 @@ const jsonLd = {
   "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
   name: "Max Aménagement",
   url: "https://max-amenagement.fr",
-  logo: "https://max-amenagement.fr/images/logo.webp",
-  image: "https://max-amenagement.fr/images/logo.webp",
+  logo: "https://max-amenagement.fr/branding/logo-max-amenagement.png",
+  image: "https://max-amenagement.fr/branding/logo-max-amenagement.png",
   description:
     "Artisan spécialiste de la rénovation intérieure, terrasses, aménagement extérieur et maçonnerie dans les Monts du Lyonnais, l'Ouest Lyonnais et la Loire.",
   telephone: "+33652756498",

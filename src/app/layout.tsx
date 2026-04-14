@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/logo.webp",
+        url: "/branding/logo-max-amenagement.png",
         alt: "Max Aménagement — Logo",
       },
     ],
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Max Aménagement | Rénovation, Terrasses & Aménagement — Ouest Lyonnais",
     description:
       "Artisan spécialiste de la rénovation intérieure, terrasses, aménagement extérieur et maçonnerie dans les Monts du Lyonnais, l'Ouest Lyonnais et la Loire.",
-    images: ["/images/logo.webp"],
+    images: ["/branding/logo-max-amenagement.png"],
   },
 };
 
