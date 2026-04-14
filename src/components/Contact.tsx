@@ -41,7 +41,7 @@ export default function Contact() {
       sitekey: TURNSTILE_SITE_KEY,
       callback: (token: string) => { turnstileToken.current = token; },
       theme: "light",
-      size: "flexible",
+      size: "invisible",
     });
   }, []);
 
