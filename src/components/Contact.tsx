@@ -10,11 +10,13 @@ interface FormData {
   email: string;
   phone: string;
   message: string;
+  website: string; // honeypot
 }
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [loadedAt] = useState(() => Date.now());
 
   const {
     register,
@@ -27,7 +29,7 @@ export default function Contact() {
     setStatus("loading");
     setErrorMsg("");
 
-    const result = await submitContactForm(data);
+    const result = await submitContactForm({ ...data, _t: loadedAt });
 
     if (result.success) {
       setStatus("success");
@@ -150,6 +152,18 @@ export default function Contact() {
                 className="flex flex-col gap-5"
                 noValidate
               >
+                {/* Honeypot — hidden from humans, bots auto-fill it */}
+                <div className="absolute opacity-0 pointer-events-none" aria-hidden="true" tabIndex={-1}>
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    type="text"
+                    autoComplete="off"
+                    tabIndex={-1}
+                    {...register("website")}
+                  />
+                </div>
+
                 {/* Nom */}
                 <div>
                   <label

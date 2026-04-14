@@ -9,6 +9,8 @@ interface ContactFormData {
   email: string;
   phone?: string;
   message: string;
+  website?: string; // honeypot field — bots fill this, humans don't see it
+  _t?: number; // timestamp — to detect instant submissions
 }
 
 const baseStyle = `
@@ -195,8 +197,37 @@ function emailForClient(data: ContactFormData) {
 </html>`;
 }
 
+// Detect random gibberish strings (e.g. "GTeVqVzZZfnCwbDOBbzDbP")
+function looksLikeGibberish(text: string): boolean {
+  const cleaned = text.replace(/\s+/g, "");
+  if (cleaned.length < 4) return false;
+  // High ratio of uppercase in the middle of the string
+  const midUppercase = cleaned.slice(1).replace(/[^A-Z]/g, "").length;
+  if (midUppercase / cleaned.length > 0.4) return true;
+  // Long sequences without vowels (>5 consonants in a row)
+  if (/[bcdfghjklmnpqrstvwxyz]{6,}/i.test(cleaned)) return true;
+  // No spaces in a long "name" (real names have spaces or are short)
+  if (text.trim().length > 20 && !text.trim().includes(" ")) return true;
+  return false;
+}
+
 export async function submitContactForm(data: ContactFormData) {
   try {
+    // Anti-spam: honeypot — if filled, it's a bot (silently succeed)
+    if (data.website) {
+      return { success: true };
+    }
+
+    // Anti-spam: time check — reject if submitted in under 3 seconds
+    if (data._t && Date.now() - data._t < 3000) {
+      return { success: true }; // silent success to not alert bots
+    }
+
+    // Anti-spam: content validation — reject gibberish
+    if (looksLikeGibberish(data.name) || looksLikeGibberish(data.message)) {
+      return { success: true }; // silent success
+    }
+
     if (!data.name || !data.email || !data.message) {
       return { success: false, error: "Veuillez remplir tous les champs obligatoires." };
     }
