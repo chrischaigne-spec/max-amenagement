@@ -256,43 +256,52 @@ export async function submitContactForm(data: ContactFormData) {
       });
       const turnstileData = await turnstileRes.json();
       if (!turnstileData.success) {
+        console.log("[contact] rejected: turnstile-failed");
         return { success: true }; // silent reject
       }
     } else {
+      console.log("[contact] rejected: no-turnstile-token");
       return { success: true }; // no token = no Turnstile widget loaded = bot
     }
 
     // 1. Honeypot — hidden field, only bots fill it
     if (data.website) {
+      console.log("[contact] rejected: honeypot");
       return { success: true };
     }
 
     // 2. Time check — reject if submitted in under 3 seconds
     if (data._t && Date.now() - data._t < 3000) {
+      console.log("[contact] rejected: too-fast");
       return { success: true };
     }
 
     // 3. Gibberish detection — random strings in name, message, or email local part
     if (looksLikeGibberish(data.name) || looksLikeGibberish(data.message)) {
+      console.log("[contact] rejected: gibberish");
       return { success: true };
     }
     const emailLocal = data.email?.split("@")[0] || "";
     if (looksLikeGibberish(emailLocal)) {
+      console.log("[contact] rejected: gibberish-email");
       return { success: true };
     }
 
     // 4. Link detection — real clients describe their project, they don't paste URLs
     if (containsLinks(data.name) || containsLinks(data.message)) {
+      console.log("[contact] rejected: contains-links");
       return { success: true };
     }
 
     // 5. Non-Latin characters — site is French, no reason for Chinese/Cyrillic/Arabic
     if (containsNonLatinChars(data.name) || containsNonLatinChars(data.message)) {
+      console.log("[contact] rejected: non-latin-chars");
       return { success: true };
     }
 
     // 6. Disposable email — temporary mailboxes used by spammers
     if (isDisposableEmail(data.email)) {
+      console.log("[contact] rejected: disposable-email");
       return { success: true };
     }
 
@@ -304,6 +313,8 @@ export async function submitContactForm(data: ContactFormData) {
     if (!emailRegex.test(data.email)) {
       return { success: false, error: "Adresse email invalide." };
     }
+
+    console.log("[contact] passed all checks, sending emails");
 
     await Promise.all([
       // Email pour Max

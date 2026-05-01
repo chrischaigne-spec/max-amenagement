@@ -52,6 +52,7 @@ export default function Footer() {
                   </a>
                   <a
                     href="tel:0658696940"
+                    data-umami-event="phone_click_footer"
                     className="transition-colors hover:text-white"
                   >
                     06.58.69.69.40

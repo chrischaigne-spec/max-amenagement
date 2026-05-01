@@ -23,6 +23,10 @@ export default function Contact() {
   const turnstileToken = useRef<string>("");
   const turnstileWidgetId = useRef<string>("");
   const turnstileContainer = useRef<HTMLDivElement>(null);
+  const hasFocused = useRef(false);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const trackEvent = (name: string) => (window as any).umami?.track(name);
 
   const {
     register,
@@ -49,24 +53,56 @@ export default function Contact() {
     if (window.turnstile) renderTurnstile();
   }, [renderTurnstile]);
 
-  const onSubmit = async (data: FormData) => {
-    if (!turnstileToken.current) {
-      setStatus("error");
-      setErrorMsg("Veuillez patienter pendant la vérification de sécurité.");
-      return;
-    }
+  const waitForTurnstileToken = (): Promise<string | null> => {
+    return new Promise((resolve) => {
+      if (turnstileToken.current) {
+        resolve(turnstileToken.current);
+        return;
+      }
+      let elapsed = 0;
+      const interval = setInterval(() => {
+        elapsed += 200;
+        if (turnstileToken.current) {
+          clearInterval(interval);
+          resolve(turnstileToken.current);
+        } else if (elapsed >= 5000) {
+          clearInterval(interval);
+          resolve(null);
+        }
+      }, 200);
+    });
+  };
 
+  const handleFormFocus = () => {
+    if (!hasFocused.current) {
+      hasFocused.current = true;
+      trackEvent("contact_form_focus");
+    }
+  };
+
+  const onSubmit = async (data: FormData) => {
+    trackEvent("contact_form_submit");
     setStatus("loading");
     setErrorMsg("");
 
-    const result = await submitContactForm({ ...data, _t: loadedAt, turnstileToken: turnstileToken.current });
+    const token = await waitForTurnstileToken();
+    if (!token) {
+      setStatus("error");
+      setErrorMsg("La vérification de sécurité a échoué. Veuillez rafraîchir la page et réessayer.");
+      trackEvent("contact_form_error");
+      return;
+    }
+
+    const result = await submitContactForm({ ...data, _t: loadedAt, turnstileToken: token });
 
     if (result.success) {
       setStatus("success");
       reset();
+      trackEvent("contact_form_success");
     } else {
       setStatus("error");
       setErrorMsg(result.error || "Il y a une erreur");
+      trackEvent("contact_form_error");
     }
 
     // Reset Turnstile for next submission
@@ -140,6 +176,7 @@ export default function Contact() {
                 {/* Téléphone */}
                 <a
                   href="tel:0658696940"
+                  data-umami-event="phone_click_contact"
                   className="flex items-start gap-4 transition-colors hover:opacity-80"
                 >
                   <Phone
@@ -185,6 +222,7 @@ export default function Contact() {
             <div className="rounded-2xl bg-white p-8">
               <form
                 onSubmit={handleSubmit(onSubmit)}
+                onFocus={handleFormFocus}
                 className="flex flex-col gap-5"
                 noValidate
               >
@@ -316,7 +354,7 @@ export default function Contact() {
       </div>
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         onReady={renderTurnstile}
       />
     </section>
